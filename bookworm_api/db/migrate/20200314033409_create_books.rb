@@ -6,6 +6,7 @@ class CreateBooks < ActiveRecord::Migration[6.0]
       t.string :author
       t.date :published_on
       t.integer :quantity, null: false, default: 0
+      t.decimal :fee, null: false, default: 0
 
       t.timestamps
 

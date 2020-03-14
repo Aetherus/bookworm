@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_14_033409) do
+ActiveRecord::Schema.define(version: 2020_03_14_035220) do
+
+  create_table "accounts", force: :cascade do |t|
+    t.string "number"
+    t.decimal "initial_balance"
+    t.string "holder_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "books", force: :cascade do |t|
     t.string "isbn", null: false
@@ -18,6 +26,7 @@ ActiveRecord::Schema.define(version: 2020_03_14_033409) do
     t.string "author"
     t.date "published_on"
     t.integer "quantity", default: 0, null: false
+    t.decimal "fee", default: "0.0", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["isbn"], name: "index_books_on_isbn", unique: true
