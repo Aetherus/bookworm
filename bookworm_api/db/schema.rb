@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_14_035220) do
+ActiveRecord::Schema.define(version: 2020_03_14_041708) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "number"
@@ -32,4 +32,17 @@ ActiveRecord::Schema.define(version: 2020_03_14_035220) do
     t.index ["isbn"], name: "index_books_on_isbn", unique: true
   end
 
+  create_table "loans", force: :cascade do |t|
+    t.integer "account_id", null: false
+    t.integer "book_id", null: false
+    t.decimal "fee", default: "0.0", null: false
+    t.datetime "returned_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_loans_on_account_id"
+    t.index ["book_id"], name: "index_loans_on_book_id"
+  end
+
+  add_foreign_key "loans", "accounts"
+  add_foreign_key "loans", "books"
 end

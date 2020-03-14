@@ -1,4 +1,6 @@
 class Account < ApplicationRecord
+  has_many :loans
+
   validates :holder_name, presence: true
   validates :number, uniqueness: true
   validates :initial_balance, numericality: { greater_than_or_equal_to: 0 }
