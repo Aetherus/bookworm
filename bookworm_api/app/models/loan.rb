@@ -8,10 +8,10 @@ class Loan < ApplicationRecord
   # we need a snapshot of the actual fee at the time of the loan.
   before_create :take_fee_snapshot
 
-  scope :unconcluded, ->{where(returned_at: nil)}
+  scope :unconcluded, ->{ where(concluded_at: nil) }
 
   def conclude
-    update(returned_at: Time.now)
+    update(concluded_at: Time.now)
   end
 
   private
