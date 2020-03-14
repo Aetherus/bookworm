@@ -7,6 +7,10 @@ class Account < ApplicationRecord
 
   before_validation :ensure_number, on: :create
 
+  def balance
+    self.initial_balance - loans.unconcluded.sum(:fee)
+  end
+
   private
 
   def ensure_number
