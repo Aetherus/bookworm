@@ -26,9 +26,10 @@ class LoansController < ApplicationController
   # Params
   #   from: RFC 3339 formated timestamp indicating the beginning of the query period
   #   to:   RFC 3339 formated timestamp indicating the end of the query period
+  #
   def index
-    loans = Loan.where(book_id: params[:book_id], created_at: params.require(:from)...params.require(:to))
-    render json: loans, each_serializer: LoanSerializer, include: []
+    loans = Loan.where(book_id: params[:book_id], created_at: params.require(:from)...params.require(:to)).preload(:account)
+    render json: loans, each_serializer: LoanSerializer, include: [:account]
   end
 
   private

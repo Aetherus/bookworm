@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
                          .try(:authenticate, params.require(:password))
 
     if librarian
-      render json: {librarian: librarian.as_json, access_token: AccessToken.generate(librarian.id)}
+      render json: {librarian: librarian.as_json, access_token: "Bearer #{AccessToken.generate(librarian.id)}"}
     else
       render json: {errors: {base: ['Invalid email address or password']}}, status: 403
     end

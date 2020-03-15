@@ -1,5 +1,9 @@
 class AccountsController < ApplicationController
 
+  def index
+    render json: Account.all, each_serializer: AccountSerializer, include: []
+  end
+
   # POST /api/v1/accounts
   #
   # Params
@@ -13,7 +17,7 @@ class AccountsController < ApplicationController
   # GET /api/v1/accounts/:id
   def show
     account = Account.where(params[:id]).preload(:loans => :book).first
-    render json: account, serializer: AccountDetailSerializer, include: {:loans => :book}
+    render json: account, serializer: AccountSerializer, include: {:loans => :book}
   end
 
   private

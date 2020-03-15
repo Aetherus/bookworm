@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   scope '/api/v1' do
     resources :sessions, only: [:create]
 
-    resources :accounts, only: [:create, :show]
+    resources :accounts, only: [:index, :show, :create]
 
     resources :books, except: [:destroy]
 

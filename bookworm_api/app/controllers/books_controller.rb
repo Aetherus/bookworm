@@ -5,12 +5,12 @@ class BooksController < ApplicationController
   def index
     @books = Book.all
 
-    render json: @books, each_serializer: BookSerializer, include: []
+    render json: @books, each_serializer: BookSerializer
   end
 
   # GET /api/v1/books/1
   def show
-    render json: @book, serializer: BookSerializer, include: []
+    render json: @book, serializer: BookWithAvailableCopiesSerializer
   end
 
   # POST /api/v1/books
@@ -18,7 +18,7 @@ class BooksController < ApplicationController
     @book = Book.new(book_params)
 
     if @book.save
-      render json: @book, serializer: BookSerializer, include: []
+      render json: @book, serializer: BookWithAvailableCopiesSerializer
     else
       render json: {errors: @book.errors}, status: 400
     end
@@ -26,8 +26,8 @@ class BooksController < ApplicationController
 
   # PATCH/PUT /api/v1/books/1
   def update
-    if @book.update(book_params)
-      render json: @book, serializer: BookSerializer, include: []
+    if @book.update(params.require(:book).permit(:quantity))
+      render json: @book, serializer: BookWithAvailableCopiesSerializer
     else
       render json: {errors: @book.errors}, status: 400
     end
