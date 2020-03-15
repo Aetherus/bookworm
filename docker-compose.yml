@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: ./bookworm_api
+    ports:
+      - 3000:3000
+
+  ui:
+    build:
+      context: ./bookworm-ui
+    ports:
+      - 8080:8080
+

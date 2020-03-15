@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :books, except: [:destroy]
 
     resources :loans, only: [:create] do
-      delete :conclude, on: :member
+      patch :conclude, on: :member
     end
 
     get '/books/:book_id/loans' => 'loans#index'

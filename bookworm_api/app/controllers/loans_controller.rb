@@ -15,9 +15,9 @@ class LoansController < ApplicationController
     end
   end
 
-  # DELETE /api/v1/loans/:id
+  # PATCH /api/v1/loans/:id/conclude
   def conclude
-    loan = Loan.find(params[:id]).conclude
+    loan = Loan.find(params[:id]).tap(&:conclude)
     render json: loan, serializer: LoanSerializer, include: [:book, :account]
   end
 
