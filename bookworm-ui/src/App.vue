@@ -1,8 +1,20 @@
 <template>
   <div class="d-flex flex-column vh-100 overflow-auto">
     <div>
-      <b-navbar type="dark" variant="info">
+      <b-navbar toggleable="lg" type="dark" variant="info">
         <b-navbar-brand to="/">Bookworm</b-navbar-brand>
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+        <b-collapse id="nav-collapse" is-nav>
+          <b-navbar-nav class="ml-auto">
+            <b-nav-item-dropdown right>
+              <!-- Using 'button-content' slot -->
+              <template v-slot:button-content>
+                <em>{{librarian && librarian.name}}</em>
+              </template>
+              <b-dropdown-item @click="signOut">Sign Out</b-dropdown-item>
+            </b-nav-item-dropdown>
+          </b-navbar-nav>
+        </b-collapse>
       </b-navbar>
     </div>
 
@@ -24,6 +36,22 @@
     </div>
   </div>
 </template>
+
+<script>
+import { mapActions, mapGetters } from 'vuex'
+
+export default {
+  computed: {
+    ...mapGetters(['librarian'])
+  },
+  methods: {
+    signOut() {
+      this.logout().then(() => this.$router.push('/login'));
+    },
+    ...mapActions(['logout'])
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .bookworm-nav-item {

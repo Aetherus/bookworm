@@ -1,6 +1,6 @@
 <template>
   <b-jumbotron header="Sign in" class="w-50 m-auto">
-    <b-form @submit.prevent="login">
+    <b-form @submit.prevent="signIn">
       <b-form-group id="email-group" label="Email" label-for="email">
         <b-form-input type="email" id="email" v-model="form.email" required/>
       </b-form-group>
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'Login',
 
@@ -26,14 +27,10 @@ export default {
   },
 
   methods: {
-    login() {
-      this.$http.post('/sessions', this.form).then(resp => {
-        window.localStorage.setItem('accessToken', resp.data.access_token);
-        this.$router.push('/books');
-      }).catch(() => {
-        console.log(arguments);
-      });
-    }
+    signIn() {
+      this.login(this.form).then(() => this.$router.push('/books'))
+    },
+    ...mapActions(['login'])
   }
 }
 </script>

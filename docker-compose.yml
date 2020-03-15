@@ -4,6 +4,8 @@ services:
   api:
     build:
       context: ./bookworm_api
+      args:
+        http_proxy: "${http_proxy}"
     ports:
       - 3000:3000
 

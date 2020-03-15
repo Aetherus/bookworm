@@ -275,5 +275,7 @@ or
 
   * Pagination
   * Concurrency-safe account number generation mechanism
+  * Move to PostgreSQL
   * Full-text search on books
+  * Better error handling
 
