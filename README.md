@@ -27,6 +27,11 @@ $ docker-compose up
 
 And you are good to go. Try visit [http://localhost:8080/].
 
+There's a librarian account that you can use to mess around
+
+  * Email: admin@bookworm.com
+  * Password: P@ssw0rd!
+
 ## API references
 
 **Common rules**
